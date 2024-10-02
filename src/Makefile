@@ -36,11 +36,13 @@ UNAME_S = $(shell uname)
 ifeq ($(UNAME_S),Darwin)
 OPEN_CMD = open
 ADD_LDFLAGS = -lgtest
+MACDIR = BrickGame.app/Contents/MacOS/$(TARGET)
 endif
 
 ifeq ($(UNAME_S),Linux)
 OPEN_CMD = xdg-open
 ADD_LDFLAGS = -lgtest -lm -lsubunit
+MACDIR = $(TARGET)
 endif
 
 all: install
@@ -62,15 +64,16 @@ install_desktop:
 	@mkdir -p $(CMAKE_BUILD_DIR)
 	@cmake -B $(CMAKE_BUILD_DIR) -S gui/desktop || { echo "Ошибка CMake"; выход 1; }
 	@cmake --build $(CMAKE_BUILD_DIR) --target $(TARGET) --parallel $(PARALLEL_JOBS) || { echo "Сборка завершилась с ошибкой"; exit 1; }
-	@if [ -f "$(CMAKE_BUILD_DIR)/$(TARGET)" ]; then \
+	@if [ "$(CMAKE_BUILD_DIR)/$(MACDIR)" ]; then \
 		echo "Копирование $(TARGET) в build/$(TARGET)_desktop"; \
-		cp -R $(CMAKE_BUILD_DIR)/$(TARGET) build/$(TARGET)_desktop; \
-		echo "Копирование $(TARGET) завершено"; \
+		cp -R $(CMAKE_BUILD_DIR)/$(MACDIR) build/$(TARGET)_desktop; \
+		echo "Копирование $(MACDIR) завершено"; \
 	else \
-		echo "Целевой объект $(TARGET) не найден в директории сборки."; \
+		echo "Целевой объект $(MACDIR) не найден в директории сборки."; \
 		exit 1; \
 	fi
 	@rm -rf $(CMAKE_BUILD_DIR)
+
 
 uninstall:
 	rm -rf build
@@ -119,8 +122,7 @@ gcov_report_snake:
 	@mkdir -p gcov
 	g++ $(CFLAGS) $(CPPSTD) $(SNAKE_FILES) ${SNAKE_TEST_FILES} $(ADD_LDFLAGS) -pthread $(GCOVFLAGS) -o gcov_test
 	./gcov_test
-	lcov -t "test" -o test.info -c -d .
-	lcov --remove test.info '/usr/*' -o test.info
+	lcov --ignore-errors inconsistent,empty --no-external -t "test" -o test.info -c -d .
 	genhtml -o gcov test.info
 	${OPEN_CMD} ./gcov/index.html
 
