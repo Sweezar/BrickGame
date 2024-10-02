@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            
+        }
+
+        .game_container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+        }
+
+        .controls p {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Tetris Game Documentation</h1>
+        <div class="tetris_game game_container">
+            <div class="controls">
+                <h2>Controls</h2>
+                <p><strong>ENTER:</strong> Start Game</p>
+                <p><strong>ESC:</strong> End Game</p>
+                <p><strong>Space:</strong> Pause Game</p>
+                <p><strong>Left Arrow:</strong> Move Figure Left</p>
+                <p><strong>Right Arrow:</strong> Move Figure Right</p>
+                <p><strong>Down Arrow:</strong> Drop Figure Down</p>
+                <p><strong>W:</strong> Rotate</p>
+            </div>
+            <div class="description">
+                <h2>Game Rules</h2>
+                <p>The game starts at level 1 and can reach up to level 10. With each new level, the difficulty increases - figure start falling faster.</p>
+                
+                <h2>Scoring</h2>
+                <p>Maximum accumulated score is saved after each game.</p>
+            </div>
+        </div>
+        <h1>Snake Game Documentation</h1>
+        <div class="snake_game game_container">
+
+            <div class="controls">
+                <h2>Controls</h2>
+                <p><strong>ENTER:</strong> Start Game</p>
+                <p><strong>ESC:</strong> End Game</p>
+                <p><strong>Space:</strong> Pause Game</p>
+                <p><strong>Left Arrow:</strong> Move Left</p>
+                <p><strong>Right Arrow:</strong> Move Right</p>
+                <p><strong>Down Arrow:</strong> Drop Down</p>
+                <p><strong>W:</strong>Acceleration</p>
+            </div>
+            <div class="description">
+                <h2>Game Rules</h2>
+                <p>The game starts at level 1 and can go up to level 10. With each new level, the difficulty increases - the snake begins to move faster.
+                    The goal of the game is to eat as many apples as possible; with each apple eaten, the length increases.</p>
+                
+                <h2>Scoring</h2>
+                <p>Maximum accumulated score is saved after each game.</p>
+            </div>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>
